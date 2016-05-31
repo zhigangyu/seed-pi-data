@@ -87,7 +87,7 @@ public class DataDao {
 						Dht dht = new Dht();
 						dht.setHumidity(rs.getString(3));
 						dht.setTemperature(rs.getString(2));
-						dht.setTime(rs.getTime(1).getTime());
+						dht.setTime(rs.getTimestamp(1).getTime());
 						dht.setDatetime(df.format(new Date(dht.getTime())));
 						return dht;
 					}

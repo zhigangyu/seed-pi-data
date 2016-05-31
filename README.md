@@ -29,7 +29,7 @@ com.ge.dspmicro.httpriver.send.destination.host="seed-pi-data.run.aws-usw02-pr.i
    
 ## Use curl command to query data: 
    ``` 
-curl -X POST --header "Content-Type: application/json" e":1,"pageSize":20,"from":"2016-05-30","to":"2016-06-01"}' "http://seed-pi-data.run.aws-usw02-pr.ice.predix.io/api/pi/quality"
+ curl -X POST --header "Content-Type: application/json" --data '{"page":1,"pageSize":20,"from":"2015-05-30","to":"2016-06-01"}' "http://seed-pi-data.run.aws-usw02-pr.ice.predix.io/api/pi/dht"
 
    ```
  
