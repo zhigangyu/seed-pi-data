@@ -32,12 +32,9 @@ public class DataService {
 	// //////// URI Paths //////////
 	/** Version path for the supported REST APIs */
 	public static final String URI_PATH_VERSION = "/v1"; //$NON-NLS-1$
-	/** REST request path for the welcome message */
-	public static final String URI_PATH_WELCOME = URI_PATH_VERSION + "/welcome"; //$NON-NLS-1$
 	/** REST request path for saving data to RDBMS or messaging queues. */
 	public static final String URI_PATH_SAVE = URI_PATH_VERSION + "/save"; //$NON-NLS-1$
-	/** REST request path for retrieving data from RDBMS. */
-	public static final String URI_PATH_RETRIEVE = URI_PATH_VERSION + "/retrieve"; //$NON-NLS-1$
+
 
 	// //////// Request Parameter Names //////////
 	// These parameter names need to be in sync with HTTP River.
