@@ -5,44 +5,7 @@
 
 ##Project structure
    ``` 
-│  manifest.yml
-│  pom.xml
-│  README.md    
-├─src
-│  ├─main
-│  │  ├─java
-│  │  │  └─com
-│  │  │      └─pactera
-│  │  │          └─predix
-│  │  │              └─seed
-│  │  │                  └─pi
-│  │  │                      ├─bean
-│  │  │                      │      Item.java
-│  │  │                      │      ItemField.java
-│  │  │                      │      PageParams.java
-│  │  │                      │      
-│  │  │                      ├─boot
-│  │  │                      │      AppConfiguration.java
-│  │  │                      │      Application.java
-│  │  │                      │      
-│  │  │                      ├─dao
-│  │  │                      │      DataDao.java
-│  │  │                      │      
-│  │  │                      └─service
-│  │  │                              DataService.java
-│  │  │                              
-│  │  └─resources
-│  │      │  application.properties
-│  │      │  db.sql
-│  │      │  
-│  │      └─META-INF
-│  │              spring.provides
-│  │              
-│  └─test
-│      ├─java
-│      └─resources
-│              application-scratch.properties
-│                
+              
    ``` 
 
 ## Installation
@@ -59,7 +22,7 @@ curl -X POST --noproxy *.predix.io  --header "Content-Type: application/json" --
 curl -X POST --noproxy *.predix.io  --header "Content-Type: application/json" e":1,"pageSize":20,"from":"2016-04-12","to":"2016-05-01"}' "http://seed-pi-data.run.aws-usw02-pr.ice.predix.io/api/pi/quality"
 
    ```
-   
+![image](http://7xrn7f.com1.z0.glb.clouddn.com/16-5-31/66219558.jpg)  
 #### Developer notes:
 
  - To load in eclipse you may use [SpringSource Tool Suite - STS](https://spring.io/tools/sts/all)  
