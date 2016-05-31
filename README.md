@@ -26,7 +26,8 @@ com.ge.dspmicro.httpriver.send.river.name="Http Sender Service"
 # [Required] Route to the river receive application. (e.g. myapp.mycloud.com)
 com.ge.dspmicro.httpriver.send.destination.host="seed-pi-data.run.aws-usw02-pr.ice.predix.io"
    ```
-   
+## the time series data
+ - ![image](http://7xuwcw.com1.z0.glb.clouddn.com/t_pi.png)
 ## Use curl command in liunx/mac terminal  to query data: 
    ``` 
 curl -X POST --header "Content-Type: application/json" --data '{"page":1,"pageSize":20,"from":"2015-05-30","to":"2016-06-01"}' "https://seed-pi-data.run.aw s-usw02-pr.ice.predix.io/api/pi/dht"
