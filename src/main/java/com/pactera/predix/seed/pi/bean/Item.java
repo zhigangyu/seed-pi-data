@@ -5,19 +5,19 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
-public class Item implements Serializable{
+public class Item<T> implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4781015749804409940L;
-	private List<ItemField> items;
+	private List<T> items;
 	private int total;
 
-	public List<ItemField> getItems() {
+	public List<T> getItems() {
 		return items;
 	}
 
-	public void setItems(List<ItemField> items) {
+	public void setItems(List<T> items) {
 		this.items = items;
 	}
 

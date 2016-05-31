@@ -7,9 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ItemField implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -3387894482044418286L;
 	private Long timestamp;
 	private String name;

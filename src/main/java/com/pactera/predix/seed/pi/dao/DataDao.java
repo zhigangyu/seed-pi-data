@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.pactera.predix.seed.pi.bean.DataNode;
+import com.pactera.predix.seed.pi.bean.Dht;
 import com.pactera.predix.seed.pi.bean.ItemField;
 import com.pactera.predix.seed.pi.bean.PageParams;
 
@@ -65,19 +67,37 @@ public class DataDao {
 				});
 	}
 
-	/**
-	 * insert pi data
-	 * 
-	 * @param param
-	 */
-	public void saveItemRegister(ItemField param) {
-		Date d = new Date();
-		if (param.getTimestamp() != null) {
-			d = new Date(param.getTimestamp());
-		}
+	
+
+	public void saveDataNode(DataNode param) {
+		
 		jdbcTemplate.update(
-				"INSERT INTO public.t_pi(d_dateline, c_name, c_category,c_value,c_quality) VALUES (?, ?, ?,?,?)",
-				new Object[] { d, param.getName(), param.getCategory(), param.getValue(), param.getQuality() });
+				"INSERT INTO t_pi(d_dateline, c_name, c_category,c_value,c_quality,c_address) VALUES (?, ?, ?,?,?,?)",
+				new Object[] { param.getTimestamp(), param.getName(), param.getCategory(), param.getValue(), param.getQuality(),param.getAddress() });	
+	}
+	
+	public List<Dht> queryDhtList(PageParams pa) {
+		return jdbcTemplate.query(
+				"select c.d_dateline, max(CASE c.c_name WHEN 'temperature' THEN c.c_value ELSE '' END) AS temperature, max(CASE c.c_name WHEN 'humidity' THEN c.c_value ELSE '' END) AS humidity from t_pi c where d_dateline between ? and ?  group by c.d_dateline order by d_dateline desc limit ? offset ?",
+				new Object[] { pa.getFrom(), pa.getTo(), pa.getPageSize(), (pa.getPage() - 1) * pa.getPageSize() },
+				new RowMapper<Dht>() {
+
+					@Override
+					public Dht mapRow(ResultSet rs, int arg1) throws SQLException {
+						Dht dht = new Dht();
+						dht.setHumidity(rs.getString(3));
+						dht.setTemperature(rs.getString(2));
+						dht.setTime(rs.getTime(1).getTime());
+						dht.setDatetime(df.format(new Date(dht.getTime())));
+						return dht;
+					}
+
+				});
+	}
+	
+	public Integer queryDhtCount(PageParams pa) {
+		return (Integer) jdbcTemplate.queryForObject("select count(*) from t_pi where d_dateline between ? and ? and c_name='temperature'",
+				new Object[] { pa.getFrom(), pa.getTo() }, Integer.class);
 	}
 
 }
