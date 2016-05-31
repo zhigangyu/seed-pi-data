@@ -16,7 +16,16 @@
  - Configure the mod bus config xml to set up the Connection node ("dataNodeConfig") and a Subscription node ("datasubscriptionconfig")
  - Replace the contents of this file $PREDIX_MACHINE_HOME/configuration/machine/com.ge.dspmicro.machineadapter.modbus-0.xml with the text below.
  - ![image](http://7xrn7f.com1.z0.glb.clouddn.com/16-5-31/66219558.jpg) 
+ - Configure the http river config file
+$PREDIX_MACHINE_HOME/configuration/machine/com.ge.dspmicro.httpriver.send-0.config
+   ```
+# [Required] A friendly and unique name of the HTTP River.
+com.ge.dspmicro.httpriver.send.river.name="Http Sender Service"
 
+
+# [Required] Route to the river receive application. (e.g. myapp.mycloud.com)
+com.ge.dspmicro.httpriver.send.destination.host="seed-pi-data.run.aws-usw02-pr.ice.predix.io"
+   ```
 ## Use curl command to query data: 
    ``` 
 curl -X POST --noproxy *.predix.io  --header "Content-Type: application/json" e":1,"pageSize":20,"from":"2016-04-12","to":"2016-05-01"}' "http://seed-pi-data.run.aws-usw02-pr.ice.predix.io/api/pi/quality"
