@@ -26,9 +26,10 @@ com.ge.dspmicro.httpriver.send.river.name="Http Sender Service"
 # [Required] Route to the river receive application. (e.g. myapp.mycloud.com)
 com.ge.dspmicro.httpriver.send.destination.host="seed-pi-data.run.aws-usw02-pr.ice.predix.io"
    ```
+   
 ## Use curl command to query data: 
    ``` 
-curl -X POST --noproxy *.predix.io  --header "Content-Type: application/json" e":1,"pageSize":20,"from":"2016-04-12","to":"2016-05-01"}' "http://seed-pi-data.run.aws-usw02-pr.ice.predix.io/api/pi/quality"
+curl -X POST --header "Content-Type: application/json" e":1,"pageSize":20,"from":"2016-05-30","to":"2016-06-01"}' "http://seed-pi-data.run.aws-usw02-pr.ice.predix.io/api/pi/quality"
 
    ```
  
