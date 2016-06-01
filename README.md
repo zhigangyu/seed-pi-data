@@ -46,24 +46,24 @@ System-Provided:
     ]
    }
  	```
- - use PgStudio to create table 
-  ```
-  create table t_pi(
-	n_id SERIAL primary key,
-	d_dateline	timestamp, 
-	c_name varchar(100),
-	c_category varchar(50),
-	c_value varchar(50),
-	c_quality varchar(50),
-	c_address character varying(200)
-);
-  ```
+ - use PgStudio to create table
+ 	```
+	  create table t_pi(
+		n_id SERIAL primary key,
+		d_dateline	timestamp, 
+		c_name varchar(100),
+		c_category varchar(50),
+		c_value varchar(50),
+		c_quality varchar(50),
+		c_address character varying(200)
+	);
+ 	```
  - Configure AppConfiguration.java to set database infomation
-  ```
- 		dataSource.setUrl("jdbc:postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable");
-		dataSource.setUsername("u328edf88d4fc43689ef2d170e84d887c");
-		dataSource.setPassword("93c309d1c8454c35afbea0c2bb68fa50");
-  ```
+ 	```
+ 	dataSource.setUrl("jdbc:postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable");
+	dataSource.setUsername("u328edf88d4fc43689ef2d170e84d887c");
+	dataSource.setPassword("93c309d1c8454c35afbea0c2bb68fa50");
+ 	```
  - use maven to build project
  - use cf push command to deploy App  
     
