@@ -1,4 +1,4 @@
-CREATE USER lathe WITH PASSWORD 'lathe';
+--CREATE USER lathe WITH PASSWORD 'lathe';
 
 create table t_pi(
 	n_id SERIAL primary key,

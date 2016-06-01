@@ -11,6 +11,61 @@
 ## Installation
  - clone repository  
     `>git clone https://github.com/zhigangyu/seed-pi-data.git`
+ - Using Cloud Foundry CLI, find the database information by looking up the VCAP service
+ 	```
+ 	> cf env seed-pi-data
+Getting env variables for ...
+OK
+
+System-Provided:
+{
+ "VCAP_SERVICES": {
+  "postgres": [
+   {
+    "credentials": {
+     "ID": 0,
+     "binding_id": "1724fc58-e2f0-4841-a1b8-ae6255ca2065",
+     "database": "d328edf88d4fc43689ef2d170e84d887c",
+     "dsn": "host=10.72.6.134 port=5432 user=u328edf88d4fc43689ef2d170e84d887c password=93c309d1c8454c35afbea0c2bb68fa50 dbname=d328edf88d4fc43689ef2d170e84d887c connect_timeout=5 sslmode=disable",
+     "host": "10.72.6.134",
+     "instance_id": "5c60f1ad-dc4b-4ff0-a14a-75797e189df2",
+     "jdbc_uri": "jdbc:postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable",
+     "password": "93c309d1c8454c35afbea0c2bb68fa50",
+     "port": "5432",
+     "uri": "postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable",
+     "username": "u328edf88d4fc43689ef2d170e84d887c"
+    },
+    "label": "postgres",
+    "name": "db",
+    "plan": "shared-nr",
+    "provider": null,
+    "syslog_drain_url": null,
+    "tags": [
+     "rdpg",
+     "postgresql"
+    ]
+   }
+ 	```
+  - use PgStudio to create table 
+  ```
+  create table t_pi(
+	n_id SERIAL primary key,
+	d_dateline	timestamp, 
+	c_name varchar(100),
+	c_category varchar(50),
+	c_value varchar(50),
+	c_quality varchar(50),
+	c_address character varying(200)
+);
+  ```
+  - Configure AppConfiguration.java to set database infomation
+  ```
+ 		dataSource.setUrl("jdbc:postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable");
+		dataSource.setUsername("u328edf88d4fc43689ef2d170e84d887c");
+		dataSource.setPassword("93c309d1c8454c35afbea0c2bb68fa50");
+  ```
+  - use maven to build project
+  - use cf push command to deploy App  
     
 ## Configure Machine Services: 
  - Configure the mod bus config xml to set up the Connection node ("dataNodeConfig") and a Subscription node ("datasubscriptionconfig")
