@@ -46,7 +46,7 @@ System-Provided:
     ]
    }
  	```
-  - use PgStudio to create table 
+ - use PgStudio to create table 
   ```
   create table t_pi(
 	n_id SERIAL primary key,
@@ -58,16 +58,16 @@ System-Provided:
 	c_address character varying(200)
 );
   ```
-  - Configure AppConfiguration.java to set database infomation
+ - Configure AppConfiguration.java to set database infomation
   ```
  		dataSource.setUrl("jdbc:postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable");
 		dataSource.setUsername("u328edf88d4fc43689ef2d170e84d887c");
 		dataSource.setPassword("93c309d1c8454c35afbea0c2bb68fa50");
   ```
-  - use maven to build project
-  - use cf push command to deploy App  
+ - use maven to build project
+ - use cf push command to deploy App  
     
-## Configure Machine Services: 
+## Generate Predix Machine container && Configure Machine Services: 
  - Configure the mod bus config xml to set up the Connection node ("dataNodeConfig") and a Subscription node ("datasubscriptionconfig")
  - Replace the contents of this file $PREDIX_MACHINE_HOME/configuration/machine/com.ge.dspmicro.machineadapter.modbus-0.xml with the text below.
  - ![image](http://7xrn7f.com1.z0.glb.clouddn.com/16-5-31/66219558.jpg) 
