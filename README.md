@@ -70,7 +70,53 @@ System-Provided:
  	```
  	
  - use maven to build project
+ 	```
+ [INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Boot pi-data 0.0.1
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ pi-data ---
+[INFO] Deleting D:\predix\projects\seed-pi-data\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ pi-data ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ pi-data ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 9 source files to D:\predix\projects\seed-pi-data\target\classes
+[WARNING] /D:/predix/projects/seed-pi-data/src/main/java/com/pactera/predix/seed/pi/service/DataService.java: D:\predix\projects\seed-pi-data\src\main\java\com\pactera\predix\seed\pi\service\DataService.java uses or overrides a deprecated API.
+[WARNING] /D:/predix/projects/seed-pi-data/src/main/java/com/pactera/predix/seed/pi/service/DataService.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ pi-data ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ pi-data ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.18.1:test (default-test) @ pi-data ---
+[INFO] 
+[INFO] --- maven-jar-plugin:2.5:jar (default-jar) @ pi-data ---
+[INFO] Building jar: D:\predix\projects\seed-pi-data\target\pi-data-0.0.1.jar
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:1.3.0.RELEASE:repackage (default) @ pi-data ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 7.836 s
+[INFO] Finished at: 2016-06-01T17:36:59+08:00
+[INFO] Final Memory: 25M/242M
+[INFO] ------------------------------------------------------------------------
+ 	```
  - use cf push command to deploy App  
+ ```
+ Ray@DESKTOP-JD3J763 D:\predix\projects
+> cf push
+ ```
     
 ## Generate Predix Machine container && Configure Machine Services: 
  - Configure the mod bus config xml to set up the Connection node ("dataNodeConfig") and a Subscription node ("datasubscriptionconfig")
