@@ -100,7 +100,9 @@ System-Provided:
  	```
  	
  - use maven to build project
+ 
  	`> mvn clean package`
+ 	
  	```
  [INFO] Scanning for projects...
 [INFO]                                                                         
