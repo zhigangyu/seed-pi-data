@@ -333,8 +333,20 @@ while True:
 sys.exit(1)
 
    ```
+## Start Modbus TCP Server
 
-## the time series data
+	`>sudo ./modbus-server.py`
+	
+## Start DHT22 modbus client:
+
+	`>sudo ./modbus-client.py`
+	
+## Start predix machine
+
+	`>sudo ./predixmachine clean`
+	
+	
+## use [PgStudio](https://studio.run.aws-usw02-pr.ice.predix.io/) to view the time series data 
  - ![image](http://7xuwcw.com1.z0.glb.clouddn.com/t_pi.png)
 ## Use curl command in liunx/mac terminal  to query data: 
    ``` 
