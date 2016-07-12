@@ -147,7 +147,6 @@ System-Provided:
  	```
  - use cf push command to deploy App  
  ```
- Ray@DESKTOP-JD3J763 D:\predix\projects
 > cf push
  ```
     
