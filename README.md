@@ -91,7 +91,7 @@ System-Provided:
 );
  	```
  	
- - Configure AppConfiguration.java to set database infomation
+ - Configure [AppConfiguration.java](https://github.com/zhigangyu/seed-pi-data/blob/master/src/main/java/com/pactera/predix/seed/pi/boot/AppConfiguration.java) to set database infomation
  
  	```
  	dataSource.setUrl("jdbc:postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable");
