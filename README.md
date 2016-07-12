@@ -27,10 +27,13 @@ services:
     - redis1
  	
  	```
+ 	
  - Build project
  	`> mvn clean package`
+ 	
  - Push to the cloud.
  	`> cf push`
+ 	
  - Using Cloud Foundry CLI, find the database information by looking up the VCAP service
  	```
  	> cf env seed-pi-data
