@@ -164,6 +164,72 @@ com.ge.dspmicro.httpriver.send.river.name="Http Sender Service"
 # [Required] Route to the river receive application. (e.g. myapp.mycloud.com)
 com.ge.dspmicro.httpriver.send.destination.host="seed-pi-data.run.aws-usw02-pr.ice.predix.io"
    ```
+
+## Replace the contents of this file $PREDIX_MACHINE_HOME/configuration/machine/com.ge.dspmicro.predixcloud.identity.config with the text below.
+
+   ```
+com.ge.dspmicro.predixcloud.identity.oauth.authmode="CLIENT_CREDENTIALS"
+
+#
+# [Required] The Predix cloud URL of an OAuth2 authorization endpoint. This is the UAA URL for 
+# the technician to log into the cloud.
+#
+com.ge.dspmicro.predixcloud.identity.oauth.authorize.url=""
+
+#
+# [Required] Predix Cloud enrollment endpoint url
+#
+com.ge.dspmicro.predixcloud.identity.uaa.enroll.url=""
+
+#
+# [Required] Predix Cloud UAA token endpoint
+#
+com.ge.dspmicro.predixcloud.identity.uaa.token.url="https://8b1123fa-67c8-47eb-9cf4-b38448aafa71.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token"
+
+#
+# Predix Cloud UAA client credentials
+#
+com.ge.dspmicro.predixcloud.identity.uaa.clientid="predix"
+com.ge.dspmicro.predixcloud.identity.uaa.clientsecret=""
+com.ge.dspmicro.predixcloud.identity.uaa.clientsecret.encrypted="j4eIxEXilaxvLJkmNb0py4bLdUB4XNwaqldD+BpRCRg\="
+
+#
+# Predix device identity.
+# deviceid must contain only lower case letters (a-z), numbers (0-9), and : - _. Must begin with a letter or number.
+#
+com.ge.dspmicro.predixcloud.identity.deviceid="pi01"
+# [Required if using JWT AuthMode] Predix cloud internal device id
+com.ge.dspmicro.predixcloud.identity.asdid=""
+com.ge.dspmicro.predixcloud.identity.tenantid=""
+
+#
+# [Required if using JWT AuthMode] Predix device MAC address used to pin certificate to device. 
+# Acceptable formats are 6 bytes of case insensitive hex with each byte separated by ':','-' or none
+#   example: xx:xx:xx:xx:xx:xx or xx-xx-xx-xx-xx-xx or XxXxXxXxXxXx   
+#
+com.ge.dspmicro.predixcloud.identity.mac="b8-27-eb-b8-ee-2f"
+
+#
+# [Optional] Predix cloud upload URL - This is used for uploading configuration command from the device.
+# The device id will be appended automatically to the end of the URL if not set.
+# When the device is enrolled this value will be set automatically. 
+#
+com.ge.dspmicro.predixcloud.identity.cloud.upload.url=""
+
+#
+# [Optional] Predix cloud Yeti signature URL - The cloud service for validating install packages.
+# When the device is enrolled this value will be set automatically. 
+#
+com.ge.dspmicro.predixcloud.identity.yeti.signature.url=""
+
+# 
+# [Required if using JWT AuthMode] Shared secret required for certificate based enrollment.
+#
+com.ge.dspmicro.predixcloud.identity.enroll.sharedSecret=""
+com.ge.dspmicro.predixcloud.identity.enroll.sharedSecret.encrypted=""
+
+   ```
+   
 # Raspberry Pi 3
 ![image](https://dri1.img.digitalrivercontent.net/Storefront/Company/msintl/images/English/en-INTL-Raspberry-Pi-3-16GB-10-Class-with-NOOBS-QK9-00028/en-INTL-L-Raspberry-Pi-3-16GB-10-Class-with-NOOBS-QK9-00028-mnco.jpg)
 ## Connect the DHT22
@@ -267,6 +333,7 @@ while True:
 sys.exit(1)
 
    ```
+
 ## the time series data
  - ![image](http://7xuwcw.com1.z0.glb.clouddn.com/t_pi.png)
 ## Use curl command in liunx/mac terminal  to query data: 
