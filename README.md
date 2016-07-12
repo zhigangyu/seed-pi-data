@@ -164,6 +164,13 @@ com.ge.dspmicro.httpriver.send.river.name="Http Sender Service"
 # [Required] Route to the river receive application. (e.g. myapp.mycloud.com)
 com.ge.dspmicro.httpriver.send.destination.host="seed-pi-data.run.aws-usw02-pr.ice.predix.io"
    ```
+# install pymodbus on raspberrry
+![image](https://dri1.img.digitalrivercontent.net/Storefront/Company/msintl/images/English/en-INTL-Raspberry-Pi-3-16GB-10-Class-with-NOOBS-QK9-00028/en-INTL-L-Raspberry-Pi-3-16GB-10-Class-with-NOOBS-QK9-00028-mnco.jpg)
+   ```
+git clone git://github.com/bashwork/pymodbus.git
+cd pymodbus
+python setup.py install
+   ```
 ## the time series data
  - ![image](http://7xuwcw.com1.z0.glb.clouddn.com/t_pi.png)
 ## Use curl command in liunx/mac terminal  to query data: 
