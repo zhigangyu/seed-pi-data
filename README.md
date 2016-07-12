@@ -4,8 +4,51 @@
 ######Please see details in the Developer notes.
 
 ##Project structure
+
    ``` 
-              
+│  manifest.yml
+│  pom.xml
+│  README.md  
+├─src
+│  ├─main
+│  │  ├─java
+│  │  │  └─com
+│  │  │      └─pactera
+│  │  │          └─predix
+│  │  │              └─seed
+│  │  │                  └─pi
+│  │  │                      ├─bean
+│  │  │                      │      DataNode.java
+│  │  │                      │      DeviceEvent.java
+│  │  │                      │      Dht.java
+│  │  │                      │      EventValue.java
+│  │  │                      │      Item.java
+│  │  │                      │      ItemField.java
+│  │  │                      │      ItemValue.java
+│  │  │                      │      PageParams.java
+│  │  │                      │      
+│  │  │                      ├─boot
+│  │  │                      │      AppConfiguration.java
+│  │  │                      │      Application.java
+│  │  │                      │      
+│  │  │                      ├─dao
+│  │  │                      │      DataDao.java
+│  │  │                      │      
+│  │  │                      └─service
+│  │  │                              DataService.java
+│  │  │                              
+│  │  └─resources
+│  │      │  application.properties
+│  │      │  db.sql
+│  │      │  
+│  │      └─META-INF
+│  │              spring.provides
+│  │              
+│  └─test
+│      ├─java
+│      └─resources
+│              application-scratch.properties
+│                          
    ``` 
 
 ## Installation
