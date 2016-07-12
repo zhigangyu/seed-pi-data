@@ -11,10 +11,15 @@
 ## Installation
  - clone repository  
     `>git clone https://github.com/zhigangyu/seed-pi-data.git`
+    
  - Create a postgres service instance:
+ 
  	`>cf create-service postgres shared-nr db`
+ 	
  - Create a redis service instance:
+ 
  	`>cf create-service redis-1 shared-vm redis1`
+ 	
  - Update manifest.yml
  	```
  	---
@@ -29,9 +34,11 @@ services:
  	```
  	
  - Build project
+ 
  	`> mvn clean package`
  	
  - Push to the cloud.
+ 
  	`> cf push`
  	
  - Using Cloud Foundry CLI, find the database information by looking up the VCAP service
