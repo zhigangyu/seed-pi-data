@@ -377,15 +377,12 @@ sys.exit(1)
 
    ```
 ## start Modbus TCP Server
-
 	`>sudo ./modbus-server.py`
 	
 ## start DHT22 modbus client:
-
 	`>sudo ./modbus-client.py`
 	
 ## start predix machine
-
 	`>sudo ./predixmachine clean`
 	
 	
