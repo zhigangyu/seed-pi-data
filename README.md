@@ -11,6 +11,26 @@
 ## Installation
  - clone repository  
     `>git clone https://github.com/zhigangyu/seed-pi-data.git`
+ - Create a postgres service instance:
+ 	`>cf create-service postgres shared-nr db`
+ - Create a redis service instance:
+ 	`>cf create-service redis-1 shared-vm redis1`
+ - Update manifest.yml
+ 	```
+ 	---
+applications:
+  - name: data-pi-data # change this to your application name
+    buildpack: java_buildpack
+    path: target/pi-data-0.0.1.jar
+services:
+    - db
+    - redis1
+ 	
+ 	```
+ - Build project
+ 	`> mvn clean package`
+ - Push to the cloud.
+ 	`> cf push`
  - Using Cloud Foundry CLI, find the database information by looking up the VCAP service
  	```
  	> cf env seed-pi-data
@@ -70,6 +90,7 @@ System-Provided:
  	```
  	
  - use maven to build project
+ 	`> mvn clean package`
  	```
  [INFO] Scanning for projects...
 [INFO]                                                                         
