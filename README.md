@@ -333,15 +333,15 @@ while True:
 sys.exit(1)
 
    ```
-## Start Modbus TCP Server
+## start Modbus TCP Server
 
 	`>sudo ./modbus-server.py`
 	
-## Start DHT22 modbus client:
+## start DHT22 modbus client:
 
 	`>sudo ./modbus-client.py`
 	
-## Start predix machine
+## start predix machine
 
 	`>sudo ./predixmachine clean`
 	
