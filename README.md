@@ -124,14 +124,22 @@ System-Provided:
  
  	```
  	create table t_pi(
-	n_id SERIAL primary key,
-	d_dateline	timestamp, 
-	c_name varchar(100),
-	c_category varchar(50),
-	c_value varchar(50),
-	c_quality varchar(50),
-	c_address character varying(200)
-);
+		n_id SERIAL primary key,
+		d_dateline	timestamp, 
+		c_name varchar(100),
+		c_category varchar(50),
+		c_value varchar(50),
+		c_quality varchar(50),
+		c_address character varying(200)
+	);
+	
+	create table t_device(
+		n_id SERIAL primary key,
+		d_dateline	timestamp, 
+		c_name varchar(100),
+		c_value decimal(10,3),
+		c_device varchar(50)
+	);
  	```
  	
  - Configure [AppConfiguration.java](https://github.com/zhigangyu/seed-pi-data/blob/master/src/main/java/com/pactera/predix/seed/pi/boot/AppConfiguration.java) to set database infomation
@@ -335,7 +343,11 @@ identity.MajorMinorRevision = '1.0'
 StartTcpServer(context, identity=identity, address=("10.10.23.30", 502))
 
    ```
+## start Modbus TCP Server
+```
 
+sudo ./modbus-server.py
+```	
 ## DHT22 modbus client
    ```
 #!/usr/bin/python
@@ -376,14 +388,12 @@ while True:
 sys.exit(1)
 
    ```
-## start Modbus TCP Server
-	`>sudo ./modbus-server.py`
 	
-## start DHT22 modbus client:
-	`>sudo ./modbus-client.py`
+## start DHT22 modbus client
+ 	`>sudo ./modbus-client.py`
 	
 ## start predix machine
-	`>sudo ./predixmachine clean`
+ 	`>sudo ./predixmachine clean`
 	
 	
 ## use [PgStudio](https://studio.run.aws-usw02-pr.ice.predix.io/) to view the time series data 
