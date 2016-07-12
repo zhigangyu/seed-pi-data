@@ -1,8 +1,7 @@
 ---
 applications:
-  - name: seed-pi-data
+  - name: env-data
     buildpack: java_buildpack
     path: target/pi-data-0.0.1.jar
 services:
     - db
-    - redis1

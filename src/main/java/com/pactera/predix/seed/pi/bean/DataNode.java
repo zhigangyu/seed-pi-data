@@ -13,6 +13,15 @@ public class DataNode implements Serializable{
 	private String value;
 	private Date timestamp;
 	private String quality;
+	private String deviceId;
+
+	public String getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
+	}
 
 	public String getAddress() {
 		return address;
