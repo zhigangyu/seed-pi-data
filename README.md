@@ -165,7 +165,7 @@ com.ge.dspmicro.httpriver.send.river.name="Http Sender Service"
 com.ge.dspmicro.httpriver.send.destination.host="seed-pi-data.run.aws-usw02-pr.ice.predix.io"
    ```
 
-## Replace the contents of this file $PREDIX_MACHINE_HOME/configuration/machine/com.ge.dspmicro.predixcloud.identity.config with the text below.
+#### modify the contents of this file $PREDIX_MACHINE_HOME/configuration/machine/com.ge.dspmicro.predixcloud.identity.config according to your UAA Service.
 
    ```
 com.ge.dspmicro.predixcloud.identity.oauth.authmode="CLIENT_CREDENTIALS"
@@ -184,14 +184,14 @@ com.ge.dspmicro.predixcloud.identity.uaa.enroll.url=""
 #
 # [Required] Predix Cloud UAA token endpoint
 #
-com.ge.dspmicro.predixcloud.identity.uaa.token.url="https://8b1123fa-67c8-47eb-9cf4-b38448aafa71.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token"
+com.ge.dspmicro.predixcloud.identity.uaa.token.url="*https://8b1123fa-67c8-47eb-9cf4-b38448aafa71.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token*"
 
 #
 # Predix Cloud UAA client credentials
 #
 com.ge.dspmicro.predixcloud.identity.uaa.clientid="predix"
-com.ge.dspmicro.predixcloud.identity.uaa.clientsecret=""
-com.ge.dspmicro.predixcloud.identity.uaa.clientsecret.encrypted="j4eIxEXilaxvLJkmNb0py4bLdUB4XNwaqldD+BpRCRg\="
+com.ge.dspmicro.predixcloud.identity.uaa.clientsecret="predix"
+com.ge.dspmicro.predixcloud.identity.uaa.clientsecret.encrypted=""
 
 #
 # Predix device identity.
