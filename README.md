@@ -176,6 +176,97 @@ git clone git://github.com/bashwork/pymodbus.git
 cd pymodbus
 python setup.py install
    ```
+   
+## Modbus Server
+   ```
+#!/usr/bin/env python
+#---------------------------------------------------------------------------# 
+# import the various server implementations
+#---------------------------------------------------------------------------# 
+from pymodbus.server.sync import StartTcpServer
+
+from pymodbus.device import ModbusDeviceIdentification
+from pymodbus.datastore import ModbusSequentialDataBlock
+from pymodbus.datastore import ModbusSlaveContext, ModbusServerContext
+
+from pymodbus.transaction import ModbusRtuFramer
+#---------------------------------------------------------------------------# 
+# configure the service logging
+#---------------------------------------------------------------------------# 
+import logging
+logging.basicConfig()
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
+
+
+store = ModbusSlaveContext(
+    di = ModbusSequentialDataBlock(0, [17]*100),
+    co = ModbusSequentialDataBlock(0, [17]*100),
+    hr = ModbusSequentialDataBlock(0, [17]*100),
+    ir = ModbusSequentialDataBlock(0, [17]*100))
+context = ModbusServerContext(slaves=store, single=True)
+
+#---------------------------------------------------------------------------# 
+# initialize the server information
+#---------------------------------------------------------------------------# 
+# If you don't set this or any fields, they are defaulted to empty strings.
+#---------------------------------------------------------------------------# 
+identity = ModbusDeviceIdentification()
+identity.VendorName  = 'Pymodbus'
+identity.ProductCode = 'PM'
+identity.VendorUrl   = 'http://github.com/bashwork/pymodbus/'
+identity.ProductName = 'Pymodbus Server'
+identity.ModelName   = 'Pymodbus Server'
+identity.MajorMinorRevision = '1.0'
+
+#---------------------------------------------------------------------------# 
+# run the server you want
+#---------------------------------------------------------------------------# 
+# Tcp:
+StartTcpServer(context, identity=identity, address=("10.10.23.30", 502))
+
+   ```
+
+## DHT22 modbus client
+   ```
+#!/usr/bin/python
+
+from pymodbus.client.sync import ModbusTcpClient as ModbusClient
+
+import sys
+import time
+import urllib
+import urllib2 
+import Adafruit_DHT
+
+import logging
+logging.basicConfig()
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
+
+client = ModbusClient('10.10.23.30', port=502)
+
+# Parse command line parameters.
+sensor = Adafruit_DHT.DHT22
+pin = 18
+
+while True:
+	humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+
+	if humidity is not None and temperature is not None:
+		print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
+		client.connect()
+		client.write_register(1, temperature)
+		client.write_register(2, humidity)
+		client.close()
+	else:
+		print('Failed to get reading. Try again!')
+
+	time.sleep(60*5)
+    
+sys.exit(1)
+
+   ```
 ## the time series data
  - ![image](http://7xuwcw.com1.z0.glb.clouddn.com/t_pi.png)
 ## Use curl command in liunx/mac terminal  to query data: 
