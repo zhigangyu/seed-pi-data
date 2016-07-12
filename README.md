@@ -164,8 +164,13 @@ com.ge.dspmicro.httpriver.send.river.name="Http Sender Service"
 # [Required] Route to the river receive application. (e.g. myapp.mycloud.com)
 com.ge.dspmicro.httpriver.send.destination.host="seed-pi-data.run.aws-usw02-pr.ice.predix.io"
    ```
-# install pymodbus on raspberrry
+# Raspberry Pi 3
 ![image](https://dri1.img.digitalrivercontent.net/Storefront/Company/msintl/images/English/en-INTL-Raspberry-Pi-3-16GB-10-Class-with-NOOBS-QK9-00028/en-INTL-L-Raspberry-Pi-3-16GB-10-Class-with-NOOBS-QK9-00028-mnco.jpg)
+## Connect the DHT22
+![image](http://7xuwcw.com1.z0.glb.clouddn.com/20150830000751994.jpg)
+![image](http://7xuwcw.com1.z0.glb.clouddn.com/20150830002549737.jpg)
+
+##install pymodbus
    ```
 git clone git://github.com/bashwork/pymodbus.git
 cd pymodbus
