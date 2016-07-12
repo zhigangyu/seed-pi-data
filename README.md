@@ -20,7 +20,7 @@
  
  	`>cf create-service redis-1 shared-vm redis1`
  	
- - Update manifest.yml
+ - Update manifest.yml to change the application name
  	```
  	---
 applications:
@@ -77,7 +77,7 @@ System-Provided:
    }
  	```
  	
- - use PgStudio to create table
+ - use [PgStudio](https://studio.run.aws-usw02-pr.ice.predix.io/) to create table 
  
  	```
  	create table t_pi(
