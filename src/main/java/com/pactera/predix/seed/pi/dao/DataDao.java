@@ -166,12 +166,62 @@ public class DataDao {
 					@Override
 					public EventValue mapRow(ResultSet rs, int arg1) throws SQLException {
 						EventValue iv = new EventValue();
-						iv.setLable(rs.getString(1));
+						iv.setLabel(rs.getString(1));
 						iv.setValue(rs.getString(2));
 						return iv;
 					}
 
 				}, new Object[] { device, device });
+	}
+
+	public List<EventValue> getLatestValue(String di) {
+		String sql = "select td.c_name,td.c_value,td.d_dateline from t_pi td, (select max(d_dateline) dl, c_name from t_pi where c_deviceid=? group by c_name) tt where td.c_name=tt.c_name and tt.dl=td.d_dateline and td.c_deviceid=?";
+
+		return jdbcTemplate.query(sql, new RowMapper<EventValue>() {
+
+			@Override
+			public EventValue mapRow(ResultSet rs, int arg1) throws SQLException {
+				EventValue iv = new EventValue();
+				iv.setLabel(rs.getString(1));
+				iv.setValue(rs.getString(2));
+				return iv;
+			}
+
+		}, new Object[] { di, di });
+	}
+
+	public List<EventValue> getLatestMaxVal(String di) {
+
+		String sql = "select c_name, max(c_value) val from t_pi where c_deviceid=? and to_char(d_dateline, 'YYMMDD') =  to_char(current_date, 'YYMMDD') group by c_name";
+
+		return jdbcTemplate.query(sql, new RowMapper<EventValue>() {
+
+			@Override
+			public EventValue mapRow(ResultSet rs, int arg1) throws SQLException {
+				EventValue iv = new EventValue();
+				iv.setLabel(rs.getString(1));
+				iv.setValue(rs.getString(2));
+				return iv;
+			}
+
+		}, new Object[] { di });
+	}
+
+	public List<EventValue> getLatestMinVal(String di) {
+
+		String sql = "select c_name, min(c_value) val from t_pi where c_deviceid=? and to_char(d_dateline, 'YYMMDD') =  to_char(current_date, 'YYMMDD') group by c_name";
+
+		return jdbcTemplate.query(sql, new RowMapper<EventValue>() {
+
+			@Override
+			public EventValue mapRow(ResultSet rs, int arg1) throws SQLException {
+				EventValue iv = new EventValue();
+				iv.setLabel(rs.getString(1));
+				iv.setValue(rs.getString(2));
+				return iv;
+			}
+
+		}, new Object[] { di });
 	}
 
 }

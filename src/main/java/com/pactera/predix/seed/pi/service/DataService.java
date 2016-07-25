@@ -134,7 +134,7 @@ public class DataService {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/dalian/v1/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/dl/v1/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String dalianbsave(@RequestParam(value = PARAM_TRANSFER_ID) String transferId,
 			@RequestParam(value = PARAM_RIVER_NAME) String riverName,
 			@RequestParam(value = PARAM_CONTENT_TYPE) String contentType,
@@ -142,9 +142,49 @@ public class DataService {
 			@RequestParam(value = PARAM_CONTENT_DESCRIPTION, required = false) String contentDescription,
 			@RequestParam(value = PARAM_TIMESTAMP) String timestamp,
 			@RequestParam(value = PARAM_DATA) MultipartFile data) throws Exception {
-		return dataSave(transferId, riverName, contentType, contentDisposition, contentDescription, timestamp, "dalian",
+		return dataSave(transferId, riverName, contentType, contentDisposition, contentDescription, timestamp, "dl",
 				data);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/bj/v1/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String bjbsave(@RequestParam(value = PARAM_TRANSFER_ID) String transferId,
+			@RequestParam(value = PARAM_RIVER_NAME) String riverName,
+			@RequestParam(value = PARAM_CONTENT_TYPE) String contentType,
+			@RequestParam(value = PARAM_CONTENT_DISPOSITION, required = false) String contentDisposition,
+			@RequestParam(value = PARAM_CONTENT_DESCRIPTION, required = false) String contentDescription,
+			@RequestParam(value = PARAM_TIMESTAMP) String timestamp,
+			@RequestParam(value = PARAM_DATA) MultipartFile data) throws Exception {
+		return dataSave(transferId, riverName, contentType, contentDisposition, contentDescription, timestamp, "bj",
+				data);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/sz/v1/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String szbsave(@RequestParam(value = PARAM_TRANSFER_ID) String transferId,
+			@RequestParam(value = PARAM_RIVER_NAME) String riverName,
+			@RequestParam(value = PARAM_CONTENT_TYPE) String contentType,
+			@RequestParam(value = PARAM_CONTENT_DISPOSITION, required = false) String contentDisposition,
+			@RequestParam(value = PARAM_CONTENT_DESCRIPTION, required = false) String contentDescription,
+			@RequestParam(value = PARAM_TIMESTAMP) String timestamp,
+			@RequestParam(value = PARAM_DATA) MultipartFile data) throws Exception {
+		return dataSave(transferId, riverName, contentType, contentDisposition, contentDescription, timestamp, "sz",
+				data);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/bud/v1/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String budbsave(@RequestParam(value = PARAM_TRANSFER_ID) String transferId,
+			@RequestParam(value = PARAM_RIVER_NAME) String riverName,
+			@RequestParam(value = PARAM_CONTENT_TYPE) String contentType,
+			@RequestParam(value = PARAM_CONTENT_DISPOSITION, required = false) String contentDisposition,
+			@RequestParam(value = PARAM_CONTENT_DESCRIPTION, required = false) String contentDescription,
+			@RequestParam(value = PARAM_TIMESTAMP) String timestamp,
+			@RequestParam(value = PARAM_DATA) MultipartFile data) throws Exception {
+		return dataSave(transferId, riverName, contentType, contentDisposition, contentDescription, timestamp, "bud",
+				data);
+	}
+
 
 	@RequestMapping(value = "/pi/{deviceId}/{temp}/{hum}", method = RequestMethod.GET, produces = {
 			"application/json" })
@@ -169,10 +209,25 @@ public class DataService {
 		_logger.info(result);
 		Date current = new Date();
 		for(EventValue eventValue : ev.getEventValues()){
-			dataDao.saveDevice(current, eventValue.getLable(), eventValue.getValue(), ev.getDeviceId());
-			result += "\n"+eventValue.getLable() + " = " + eventValue.getValue();
+			dataDao.saveDevice(current, eventValue.getLabel(), eventValue.getValue(), ev.getDeviceId());
+			result += "\n"+eventValue.getLabel() + " = " + eventValue.getValue();
 		}
 		return result;
+	}
+	
+	@RequestMapping(value = "/item/{deviceId}", method = RequestMethod.GET, produces = { "application/json" })
+	public List<EventValue> getLatesValue(@PathVariable("deviceId") String deviceId) {
+		return dataDao.getLatestValue(deviceId);
+	}
+	
+	@RequestMapping(value = "/item/max/{deviceId}", method = RequestMethod.GET, produces = { "application/json" })
+	public List<EventValue> getLatesMaxValue(@PathVariable("deviceId") String deviceId) {
+		return dataDao.getLatestMaxVal(deviceId);
+	}
+	
+	@RequestMapping(value = "/item/min/{deviceId}", method = RequestMethod.GET, produces = { "application/json" })
+	public List<EventValue> getLatesMinValue(@PathVariable("deviceId") String deviceId) {
+		return dataDao.getLatestMinVal(deviceId);
 	}
 
 }
