@@ -351,7 +351,144 @@ sys.exit(1)
  	`>sudo ./modbus-client.py`
 
 ## PM2.5
+####Connect the sensor to Raspberry Pi 3
+![image](http://7xuwcw.com1.z0.glb.clouddn.com/pm25.PNG)
 
+
+####Python Code
+```
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from pymodbus.client.sync import ModbusTcpClient as ModbusClient
+import time
+import serial
+import logging
+
+#check the checksum value
+def check_value(data, length):
+    if(0 == len(data) or length != 32):
+        print "check_value input error!!!!!"
+        return False
+    else:
+        #get the checksum from the two bytes of the data
+        csum = int('%02x'%ord(data[length - 2]) + '%02x'%ord(data[length - 1]), 16)
+        print "csum is %d" % csum
+        tmp = 0
+        
+        #calculate the checksum
+        for i in range(length - 2):
+            tmp += int('%02x'%ord(data[i]), 16)
+        print "tmp is %s" % tmp
+        
+        #compare the checksum
+        if(tmp == csum):
+            return True
+        else:
+            return False
+
+#read the aqi data from the sensor
+def read_pms_data():
+    logging.basicConfig()
+    log = logging.getLogger()
+    log.setLevel(logging.DEBUG)
+    
+    #head data
+    head = ''
+    
+    #aqi data
+    data = ''
+    
+    #create the modbus client to send the aqi data to the modbus server.
+    try:
+        client = ModbusClient('10.10.23.30', port=502)
+    except Exception as e:
+        logging.exception(e)
+        
+    #serial instance
+    ser = None
+    
+    try:
+        #open serial
+        ser = serial.Serial("/dev/ttyAMA0", 9600, timeout=1.5)
+    except Exception as e:
+        logging.exception(e)
+        
+    while True:
+        try:
+            #read the head data
+            head = ser.read(1)
+            
+            #the head data must be 42
+            if('42' == '%02x'%ord(head)):
+                print "find head!!!!!"
+                
+                #read the aqi data
+                data = ser.read(31)
+                print "read len is [%d][%s]" % (len(data), '%02x'%ord(data[0]))
+                
+                #judge the length of the data and check the checksum of the data
+                if('4d' == '%02x'%ord(data[0]) and 31 == len(data) and check_value(head + data, 32)):
+                    length = 2
+                    print "%s%s" % ('%02x'%ord(head), '%02x'%ord(data[0]))
+                    print_data = '%02x'%ord(head) + '%02x'%ord(data[0])
+                    
+                    #serialize the data to output
+                    while length < 32:
+                        print_data = print_data + '%02x'%ord(data[length - 1]) + '%02x'%ord(data[length])
+                        length = length + 2
+                    print print_data
+                    #print_data = "pm1.0 value is %s, " + str(int('%02x'%ord(data[9]) + '%02x'%ord(data[9]), 16))
+                    pm1p0 = int('%02x'%ord(data[9]) + '%02x'%ord(data[10]), 16)
+                    pm2p5 = int('%02x'%ord(data[11]) + '%02x'%ord(data[12]), 16)
+                    pm10 = int('%02x'%ord(data[13]) + '%02x'%ord(data[14]), 16)
+                    print_data = "pm1.0 value is %d μg/m³" % pm1p0 + \
+                                 "\t\tpm2.5 value is %d μg/m³" % pm2p5 + \
+                                 "\t\tpm10 value is %d μg/m³" % pm10
+                    
+                    print print_data
+                    client.connect()
+                    client.write_register(3, pm1p0)
+                    client.write_register(4, pm2p5)
+                    client.write_register(5, pm10)
+                    pm1p0_value = client.read_holding_registers(3,1)
+                    pm2p5_value = client.read_holding_registers(4,1)
+                    pm10_value = client.read_holding_registers(5,1)
+                    log.debug("send pm1.0 value = %s[%s]" % (str(pm1p0_value.registers[0]), type(pm1p0_value.registers[0])))
+                    log.debug("send pm2.5 value = %s[%s]" % (str(pm2p5_value.registers[0]), type(pm2p5_value.registers[0])))
+                    log.debug("send pm10 value = %s[%s]" % (str(pm10_value.registers[0]), type(pm10_value.registers[0])))
+                    #client.write_register(4, int('%02x'%ord(data[11]) + '%02x'%ord(data[12]), 16))
+#                     client.write_register(5, int('%02x'%ord(data[13]) + '%02x'%ord(data[14]), 16))
+                    client.close()
+                    #print "read r3 is %d[%s]" % (client.read_register(3), type(client.read_register(3)))
+                    #print "read r4 is %d[%s]" % (client.read_register(4), type(client.read_register(4)))
+#                     print "read r5 is %d[%s]" % (client.read_register(5), type(client.read_register(5)))
+                    time.sleep(5)
+                else:
+                    print "read data error!!!!![%d][%s]" % (len(data), '%02x'%ord(data[0]))
+                    data = ''
+            else:
+                print "head error!!!!![%s]" % ('%02x'%ord(head))
+                head = ''
+                continue
+        except Exception as e:
+                logging.exception(e)
+'''
+    if check == tmp:
+      print "temperature :", temperature, "*C, humidity :", humidity, "%"
+      client.connect()
+      client.write_register(1, temperature)
+      client.write_register(2, humidity)
+      client.close()
+    else:
+      print "wrong"
+      print "temperature :", temperature, "*C, humidity :", humidity, "% check :", check, ", tmp :", tmp
+    GPIO.cleanup()
+    time.sleep(60)
+'''
+
+if __name__=='__main__':
+    read_pms_data()
+```
 	
 ## start predix machine
  	`>sudo ./predixmachine clean`
