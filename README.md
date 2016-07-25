@@ -361,17 +361,17 @@ sys.exit(1)
 ``` 
 curl -X POST --header "Content-Type: application/json" --data '{"page":1,"pageSize":20,"from":"2015-05-30","to":"2016-06-01"}' "https://seed-pi-data.run.aws-usw02-pr.ice.predix.io/api/pi/dht"
 ```
-#### query current data by location
+#### query current value by location (https://seed-pi-data.run.aws-usw02-pr.ice.predix.io/item/{location})
 ```
 curl -X GET --header "Content-Type: application/json" "https://seed-pi-data.run.aws-usw02-pr.ice.predix.io/item/dl"
 ```
 
-#### query min data by location
+#### query min value by location (https://seed-pi-data.run.aws-usw02-pr.ice.predix.io/item/min/{location})
 ```
 curl -X GET --header "Content-Type: application/json" "https://seed-pi-data.run.aws-usw02-pr.ice.predix.io/item/min/dl"
 ```
 
-#### query max data by location
+#### query max value by location (https://seed-pi-data.run.aws-usw02-pr.ice.predix.io/item/max/{location})
 ```
 curl -X GET --header "Content-Type: application/json" "https://seed-pi-data.run.aws-usw02-pr.ice.predix.io/item/max/dl"
 ```
