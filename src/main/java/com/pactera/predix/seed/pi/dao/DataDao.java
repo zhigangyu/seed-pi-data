@@ -192,7 +192,7 @@ public class DataDao {
 
 	public List<EventValue> getLatestMaxVal(String di) {
 
-		String sql = "select c_name, max(c_value) val from t_pi where c_deviceid=? and to_char(d_dateline, 'YYMMDD') =  to_char(current_date, 'YYMMDD') group by c_name";
+		String sql = "select c_name, max(cast ( c_value as numeric )) val from t_pi where c_deviceid=? and to_char(d_dateline, 'YYMMDD') =  to_char(current_date, 'YYMMDD') group by c_name";
 
 		return jdbcTemplate.query(sql, new RowMapper<EventValue>() {
 
@@ -209,7 +209,7 @@ public class DataDao {
 
 	public List<EventValue> getLatestMinVal(String di) {
 
-		String sql = "select c_name, min(c_value) val from t_pi where c_deviceid=? and to_char(d_dateline, 'YYMMDD') =  to_char(current_date, 'YYMMDD') group by c_name";
+		String sql = "select c_name, min(cast ( c_value as numeric )) val from t_pi where c_deviceid=? and to_char(d_dateline, 'YYMMDD') =  to_char(current_date, 'YYMMDD') group by c_name";
 
 		return jdbcTemplate.query(sql, new RowMapper<EventValue>() {
 

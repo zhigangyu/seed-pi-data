@@ -116,7 +116,6 @@ public class DataService {
 				for (DataNode item : list) {
 					item.setDeviceId(deviceId);
 					item.setTimestamp(new Date(sendTime));
-					;
 					dataDao.saveDataNode(item);
 				}
 			}
@@ -182,6 +181,19 @@ public class DataService {
 			@RequestParam(value = PARAM_TIMESTAMP) String timestamp,
 			@RequestParam(value = PARAM_DATA) MultipartFile data) throws Exception {
 		return dataSave(transferId, riverName, contentType, contentDisposition, contentDescription, timestamp, "bud",
+				data);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/sh/v1/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String shbsave(@RequestParam(value = PARAM_TRANSFER_ID) String transferId,
+			@RequestParam(value = PARAM_RIVER_NAME) String riverName,
+			@RequestParam(value = PARAM_CONTENT_TYPE) String contentType,
+			@RequestParam(value = PARAM_CONTENT_DISPOSITION, required = false) String contentDisposition,
+			@RequestParam(value = PARAM_CONTENT_DESCRIPTION, required = false) String contentDescription,
+			@RequestParam(value = PARAM_TIMESTAMP) String timestamp,
+			@RequestParam(value = PARAM_DATA) MultipartFile data) throws Exception {
+		return dataSave(transferId, riverName, contentType, contentDisposition, contentDescription, timestamp, "sh",
 				data);
 	}
 
