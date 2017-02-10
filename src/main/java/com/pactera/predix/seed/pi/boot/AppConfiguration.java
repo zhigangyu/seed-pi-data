@@ -13,17 +13,14 @@ public class AppConfiguration{
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://localhost/postgres");
-		dataSource.setUsername("lathe");
-		dataSource.setPassword("lathe");
 		
-		dataSource.setUrl("jdbc:postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable");
-		dataSource.setUsername("u328edf88d4fc43689ef2d170e84d887c");
-		dataSource.setPassword("93c309d1c8454c35afbea0c2bb68fa50");
+		//dataSource.setUrl("jdbc:postgres://u328edf88d4fc43689ef2d170e84d887c:93c309d1c8454c35afbea0c2bb68fa50@10.72.6.134:5432/d328edf88d4fc43689ef2d170e84d887c?sslmode=disable");
+		//dataSource.setUsername("u328edf88d4fc43689ef2d170e84d887c");
+		//dataSource.setPassword("93c309d1c8454c35afbea0c2bb68fa50");
 		
-		//dataSource.setUrl("jdbc:postgres://udb36bcc21b9041afbdd2d7772b43f5b8:274a17134f294dffa3899acc8dd62898@10.72.6.125:5432/ddb36bcc21b9041afbdd2d7772b43f5b8?sslmode=disable");
-		//dataSource.setUsername("udb36bcc21b9041afbdd2d7772b43f5b8");
-		//dataSource.setPassword("274a17134f294dffa3899acc8dd62898");
+		dataSource.setUrl("jdbc:postgresql://10.72.6.143:5432/d577d4f17e6db47eebd48ec67db31f2bf?user=ueac619d7d79b4c01b842c23574cb8ad3\u0026password=93390e226aec4537bc922db07e98b4e7\u0026ssl=false");
+		dataSource.setUsername("ueac619d7d79b4c01b842c23574cb8ad3");
+		dataSource.setPassword("93390e226aec4537bc922db07e98b4e7");
 		
 		return dataSource;
 	}

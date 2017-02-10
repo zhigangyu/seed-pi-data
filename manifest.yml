@@ -1,7 +1,9 @@
 ---
 applications:
-  - name: seed-pi-data
+  - name: pi-data
     buildpack: java_buildpack
     path: target/pi-data-0.0.1.jar
+    memory: 512M
+    disk_quota: 200M
 services:
     - db
